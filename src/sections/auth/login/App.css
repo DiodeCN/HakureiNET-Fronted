@@ -1,0 +1,32 @@
+@font-face {
+	font-family: AllFont;
+	src: url(https://vkceyugu.cdn.bspapp.com/VKCEYUGU-9fdf198e-c41d-406e-9267-1586587030db/39b58195-6aa1-4c82-a0de-b1d743239dac.woff2);
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap
+}
+
+*:not([class*=icon]):not(i) {
+	font-family: AllFont !important
+}
+
+
+body
+{
+/*
+background:#ffffff url('https://src.diodecn.cn/bg.jpg');
+background-repeat:no-repeat;
+background-size: cover;
+background-position:left top;
+*/
+opacity: 0.8;
+}
+
+
+/*
+p
+{
+    color:#B22222!important;
+    font-weight:bold;
+}
+*/
