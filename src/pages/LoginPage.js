@@ -1,12 +1,11 @@
 import { Helmet } from 'react-helmet-async';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Link, Container, Typography, Divider, Stack, Button } from '@mui/material';
+import { Link, Container, Typography } from '@mui/material';
 // hooks
 import useResponsive from '../hooks/useResponsive';
 // components
 import Logo from '../components/logo';
-import Iconify from '../components/iconify';
 // sections
 import { LoginForm } from '../sections/auth/login';
 
@@ -71,7 +70,7 @@ export default function LoginPage() {
 
             <Typography variant="body2" sx={{ mb: 5 }}>
               没有物联网设备？ {''}
-              <Link variant="subtitle2">了解更多</Link>
+              <Link href="https://elmcose.cn/2023/03/31/HakureiNET/" variant="subtitle2">了解更多</Link>
             </Typography>
             <LoginForm />
           </StyledContent>
@@ -85,7 +84,7 @@ export default function LoginPage() {
 }
 
 /*
-这个是一个设想，后面可以放开发人员
+这个是一个设想，后面可以放点什么
         {mdUp && (
           <StyledSection>
           <h2>这里弄几个Gird</h2>
