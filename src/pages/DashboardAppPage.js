@@ -4,6 +4,8 @@ import IconButton from "@mui/material/IconButton";
 import ToysIcon from "@material-ui/icons/Toys";
 import HelpIcon from "@material-ui/icons/Help";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Helmet } from "react-helmet-async";
@@ -180,6 +182,8 @@ export default function DashboardAppPage() {
 
   let content = null;
   let controlcenter = null;
+  const [showAutomationControls, setShowAutomationControls] = useState(true);
+
 
   if (count === null) {
     content = (
@@ -506,12 +510,19 @@ export default function DashboardAppPage() {
                   <Grid item xs={12} sm={0}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
-                        <Typography
-                          variant="h4"
-                          sx={{ color: "#555555", mb: 2 }}
-                        >
-                          自动化
-                        </Typography>
+                      <Typography variant="h4" sx={{ color: "#555555", mb: 2, display: 'flex', alignItems: 'center' }}>
+  自动化
+  <IconButton
+    edge="end"
+    color="inherit"
+    onClick={() => setShowAutomationControls(!showAutomationControls)}
+    sx={{ marginLeft: 1 }}
+  >
+    {showAutomationControls ? <Visibility /> : <VisibilityOff />}
+  </IconButton>
+</Typography>
+{showAutomationControls && (
+    <>
                         <Typography
                           variant="subtitle1"
                           color="textSecondary"
@@ -535,9 +546,7 @@ export default function DashboardAppPage() {
                           inputProps={{
                             step: 60, // 每一分钟为一个步长
                           }} />
-                      </Grid>
-
-                      <Grid item xs={12}>
+                                                <Grid item xs={12}>
                         <Typography
                           variant="subtitle1"
                           color="textSecondary"
@@ -559,6 +568,15 @@ export default function DashboardAppPage() {
                           ))}
                         </FormGroup>
                       </Grid>
+    </>
+  )}
+
+
+
+
+                      </Grid>
+
+
 
                       <Grid item xs={12}>
                         <Typography
