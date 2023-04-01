@@ -41,9 +41,12 @@ const connect = () => {
       localStorage.setItem(`${counts}.isLive`, "1");
       localStorage.setItem(`${counts}.type`, type);
       localStorage.setItem(`${id}.aldregisteredcount`, "1");
+      localStorage.setItem(`${id}.countid`, counts);
+
 
       // localStorage.setItem(`${counts}.familygroup`,"默认家庭组");
-      localStorage.setItem(`${id}.familygroup`, "默认家庭组");
+      // localStorage.setItem(`${id}.familygroup`, "默认家庭组");
+      localStorage.setItem(`${counts}.familygroup`, "默认家庭组");
 
       console.log(`${counts}台设备已绑定`);
   

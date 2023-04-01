@@ -126,6 +126,8 @@ export default function DashboardAppPage() {
 
   const renderPopoverContent = (groups, deviceId) => {
     const deviceFamilyGroup = localStorage.getItem(`${deviceId}.familygroup`);
+    const countid=localStorage.getItem(`${deviceId}.countid`);
+
     if (deviceFamilyGroup === "") {
       setSelectedGroup1("默认家庭组"); // 这里有bug，只能开个默认家庭组乐
     }
@@ -141,7 +143,11 @@ export default function DashboardAppPage() {
             onChange={(event) => {
               setSelectedGroup1(event.target.value);
               localStorage.setItem(
-                `${deviceId}.familygroup`,
+                `${deviceId}.familygroup`,// 问题出在这里，我存的是id不是countid
+                event.target.value
+              );
+              localStorage.setItem(
+                `${countid}.familygroup`,// 这样才对嘛
                 event.target.value
               );
             }}
@@ -174,7 +180,7 @@ export default function DashboardAppPage() {
 
   connect();
   // sendMsg("OK");
-  console.log(count);
+  // console.log(count);
 
   let content = null;
   let controlcenter = null;
@@ -182,10 +188,34 @@ export default function DashboardAppPage() {
   const [showAutomationControls, setShowAutomationControls] = useState(false);
   const [showTimerControls, setShowTimerControls] = useState(false);
   const handleConfirm = () => {
+    const selectedGroupName = selectedGroup;
+    
+    // 遍历所有设备 呜呜呜，为什么不能用++
+    for (let i = 1; i <= count; i+=1) {
+      const deviceFamilyGroup = localStorage.getItem(`${i}.familygroup`);
+      
+      // 检查设备是否属于选定的家庭组
+      if (deviceFamilyGroup === selectedGroupName) {
+        console.log(`设备 ${i} 属于选定的家庭组：${selectedGroupName}`);
+      }
+    }
+  
     setShowAutomationControls(false);
   };
+  
   const handleConfirm1 = () => {
+    const selectedGroupName = selectedGroup;
+
     console.log("选定的时间:", customTime);
+
+    for (let i0 = 1; i0 <= count; i0+=1) {
+      const deviceFamilyGroup = localStorage.getItem(`${i0}.familygroup`);
+      
+      // 检查设备是否属于选定的家庭组
+      if (deviceFamilyGroup === selectedGroupName) {
+        console.log(`设备 ${i0} 属于选定的家庭组：${selectedGroupName}`);
+      }
+    }
     setShowTimerControls(false);
   };
 
@@ -447,17 +477,23 @@ export default function DashboardAppPage() {
                       <Button
                         variant="contained"
                         onClick={() => {
-                          setIsAddingGroup(false);
-                          setFamilyGroups((prevGroups) => [
-                            ...prevGroups,
-                            newGroupName
-                          ]);
-                          setSelectedGroup(newGroupName);
-                          setNewGroupName("");
-                          localStorage.setItem(
-                            "familyGroups",
-                            JSON.stringify([...familyGroups, newGroupName])
-                          );
+                          if (newGroupName===""){
+                            setIsAddingGroup(false);
+                          }else{
+                            setIsAddingGroup(false);
+                            setFamilyGroups((prevGroups) => [
+                              ...prevGroups,
+                              newGroupName
+                            ]);
+                            setSelectedGroup(newGroupName);
+                            setNewGroupName("");
+                            localStorage.setItem(
+                              "familyGroups",
+                              JSON.stringify([...familyGroups, newGroupName])
+                            );
+                          };
+
+
                         }}
                         sx={{ marginRight: "8px" }}
                       >
@@ -485,9 +521,7 @@ export default function DashboardAppPage() {
                   marginTop: 2
                 }}
               >
-                {/*
 
-    */}
                 <Grid container spacing={2} sx={{ marginTop: 0 }}>
                   <Grid item xs={12} sm={0}>
                     <Grid container spacing={2}>
