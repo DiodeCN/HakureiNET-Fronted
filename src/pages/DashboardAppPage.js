@@ -22,7 +22,7 @@ import {
   Menu,
   MenuItem,
   Button,
-  Popover,
+  Popover
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -66,13 +66,13 @@ export default function DashboardAppPage() {
   const [selectedMinute, setSelectedMinute] = useState(14);
   const FamilyGroupSelector1 = ({ familyGroups, setSelectedGroup }) => {
     const [selectedGroup, setSelectedGroupLocal] = useState("");
-  
+
     const handleChange = (event) => {
       const selectedGroup = event.target.value;
       setSelectedGroupLocal(selectedGroup);
       setSelectedGroup(selectedGroup);
     };
-  
+
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <Select value={selectedGroup} onChange={handleChange}>
@@ -86,10 +86,8 @@ export default function DashboardAppPage() {
       </FormControl>
     );
   };
-  
 
   let id0 = null;
-
 
   const hours = Array.from({ length: 24 }, (_, i) => i);
   const weekdays = [
@@ -100,7 +98,7 @@ export default function DashboardAppPage() {
     "周五",
     "周六",
     "周日",
-    "星期八！",
+    "星期八！"
   ];
   const toggleDay = (day) => {
     if (selectedDays.includes(day)) {
@@ -184,7 +182,6 @@ export default function DashboardAppPage() {
   let controlcenter = null;
   const [showAutomationControls, setShowAutomationControls] = useState(true);
 
-
   if (count === null) {
     content = (
       <Box
@@ -195,7 +192,7 @@ export default function DashboardAppPage() {
           borderRadius: 2,
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
           textAlign: "center",
-          mt: 2,
+          mt: 2
         }}
       >
         <Typography variant="h2" sx={{ mb: 3, color: "#2E2E2E" }}>
@@ -235,7 +232,7 @@ export default function DashboardAppPage() {
           <Slider
             sx={{
               marginLeft: "auto",
-              width: "100px", // 设置滑块宽度
+              width: "100px" // 设置滑块宽度
             }}
             onChange={debounce((event, newValue) => {
               sendMsg(`&*${newValue}/${shortKey}`);
@@ -244,7 +241,7 @@ export default function DashboardAppPage() {
         ) : (
           <Switch
             sx={{
-              marginLeft: "auto",
+              marginLeft: "auto"
             }}
             onChange={(event) => {
               const action = event.target.checked ? "&open;" : "&shut;";
@@ -254,7 +251,6 @@ export default function DashboardAppPage() {
         );
       return (
         <Box className="switch">
-
           <Box
             key={id}
             id={id}
@@ -273,7 +269,7 @@ export default function DashboardAppPage() {
               marginLeft: "8px",
               marginRight: "8px",
               background: "rgba(255, 255, 255, 0.7)", // 白色磨砂透明背景
-              backdropFilter: "blur(10px)", // 模糊滤镜
+              backdropFilter: "blur(10px)" // 模糊滤镜
             }}
           >
             {type === "风扇" ? (
@@ -294,7 +290,7 @@ export default function DashboardAppPage() {
 
             <IconButton
               sx={{
-                marginLeft: "8px",
+                marginLeft: "8px"
               }}
               onClick={() => {
                 localStorage.setItem(`${id}.isLive`, 0);
@@ -324,7 +320,7 @@ export default function DashboardAppPage() {
             borderRadius: 2,
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
             textAlign: "center",
-            mt: 2,
+            mt: 2
           }}
         >
           <Typography variant="h2" sx={{ mb: 3, color: "#2E2E2E" }}>
@@ -342,21 +338,23 @@ export default function DashboardAppPage() {
     } else {
       content = switches;
       controlcenter = (
-        <><Popover
-          open={isPopoverOpen}
-          anchorEl={anchorElPopover}
-          onClose={handlePopoverClose}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-        >
-          {renderPopoverContent(familyGroups, id0)}
-        </Popover><div style={{ display: "flex", justifyContent: "center" }}>
+        <>
+          <Popover
+            open={isPopoverOpen}
+            anchorEl={anchorElPopover}
+            onClose={handlePopoverClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left"
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left"
+            }}
+          >
+            {renderPopoverContent(familyGroups, id0)}
+          </Popover>
+          <div style={{ display: "flex", justifyContent: "center" }}>
             <Box
               id="contorlcenter"
               sx={{
@@ -370,7 +368,7 @@ export default function DashboardAppPage() {
                 background: "rgba(255, 255, 255, 0.7)",
                 backdropFilter: "blur(10px)",
                 alignItems: "center",
-                align: "center",
+                align: "center"
               }}
             >
               <Typography variant="h3" sx={{ color: "#555555", mb: 2 }}>
@@ -417,14 +415,15 @@ export default function DashboardAppPage() {
                       value={newGroupName}
                       onChange={(event) => setNewGroupName(event.target.value)}
                       fullWidth
-                      sx={{ mb: 2 }} />
+                      sx={{ mb: 2 }}
+                    />
                     <Box
                       sx={{
                         display: "flex",
                         justifyContent: "left",
                         alignItems: "left",
                         width: "100%",
-                        marginTop: "0px",
+                        marginTop: "0px"
                       }}
                     >
                       <Button
@@ -433,7 +432,7 @@ export default function DashboardAppPage() {
                           setIsAddingGroup(false);
                           setFamilyGroups((prevGroups) => [
                             ...prevGroups,
-                            newGroupName,
+                            newGroupName
                           ]);
                           setSelectedGroup(newGroupName);
                           setNewGroupName("");
@@ -441,7 +440,7 @@ export default function DashboardAppPage() {
                             "familyGroups",
                             JSON.stringify([...familyGroups, newGroupName])
                           );
-                        } }
+                        }}
                         sx={{ marginRight: "8px" }}
                       >
                         确定
@@ -452,7 +451,7 @@ export default function DashboardAppPage() {
                           setIsAddingGroup(false);
                           setNewGroupName("");
                           setSelectedGroup("默认家庭组");
-                        } }
+                        }}
                       >
                         取消
                       </Button>
@@ -465,7 +464,7 @@ export default function DashboardAppPage() {
                 sx={{
                   width: "100%",
                   borderTop: "1px solid black",
-                  marginTop: 2,
+                  marginTop: 2
                 }}
               >
                 {/*
@@ -510,76 +509,89 @@ export default function DashboardAppPage() {
                   <Grid item xs={12} sm={0}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
-                      <Typography variant="h4" sx={{ color: "#555555", mb: 2, display: 'flex', alignItems: 'center' }}>
-  自动化
-  <IconButton
-    edge="end"
-    color="inherit"
-    onClick={() => setShowAutomationControls(!showAutomationControls)}
-    sx={{ marginLeft: 1 }}
-  >
-    {showAutomationControls ? <Visibility /> : <VisibilityOff />}
-  </IconButton>
-</Typography>
-{showAutomationControls && (
-    <>
                         <Typography
-                          variant="subtitle1"
-                          color="textSecondary"
-                          sx={{ mb: 1 }}
+                          variant="h4"
+                          sx={{
+                            color: "#555555",
+                            mb: 2,
+                            display: "flex",
+                            alignItems: "center"
+                          }}
                         >
-                          选择时间：
+                          自动化
+                          <IconButton
+                            edge="end"
+                            color="inherit"
+                            onClick={() =>
+                              setShowAutomationControls(!showAutomationControls)
+                            }
+                            sx={{ marginLeft: 1 }}
+                          >
+                            {showAutomationControls ? (
+                              <Visibility />
+                            ) : (
+                              <VisibilityOff />
+                            )}
+                          </IconButton>
                         </Typography>
-                        <TextField
-                          type="time"
-                          value={`${selectedHour
-                            .toString()
-                            .padStart(2, "0")}:${selectedMinute
-                              .toString()
-                              .padStart(2, "0")}`}
-                          onChange={(event) => {
-                            const [hour, minute] = event.target.value.split(":");
-                            setSelectedHour(parseInt(hour, 10));
-                            setSelectedMinute(parseInt(minute, 10));
-                          } }
-                          sx={{ width: "100%" }}
-                          inputProps={{
-                            step: 60, // 每一分钟为一个步长
-                          }} />
-                                                <Grid item xs={12}>
-                        <Typography
-                          variant="subtitle1"
-                          color="textSecondary"
-                          sx={{ mb: 1 }}
-                        >
-                          选择星期：
-                        </Typography>
-                        <FormGroup
-                          sx={{ display: "flex", flexDirection: "row", m: 0 }}
-                        >
-                          {weekdays.map((day, index) => (
-                            <FormControlLabel
-                              key={index}
-                              control={<Checkbox
-                                checked={selectedDays.includes(day)}
-                                onChange={() => toggleDay(day)} />}
-                              label={day}
-                              sx={{ flexBasis: "10%", width: "100%" }} />
-                          ))}
-                        </FormGroup>
-                      </Grid>
-    </>
-  )}
-
-
-
-
-                      </Grid>
-
-
-
-                      <Grid item xs={12}>
-                        <Typography
+                        {showAutomationControls && (
+                          <>
+                            <Typography
+                              variant="subtitle1"
+                              color="textSecondary"
+                              sx={{ mb: 1 }}
+                            >
+                              选择时间：
+                            </Typography>
+                            <TextField
+                              type="time"
+                              value={`${selectedHour
+                                .toString()
+                                .padStart(2, "0")}:${selectedMinute
+                                .toString()
+                                .padStart(2, "0")}`}
+                              onChange={(event) => {
+                                const [hour, minute] =
+                                  event.target.value.split(":");
+                                setSelectedHour(parseInt(hour, 10));
+                                setSelectedMinute(parseInt(minute, 10));
+                              }}
+                              sx={{ width: "100%" }}
+                              inputProps={{
+                                step: 60 // 每一分钟为一个步长
+                              }}
+                            />
+                            <Grid item xs={12}>
+                              <Typography
+                                variant="subtitle1"
+                                color="textSecondary"
+                                sx={{ mb: 1 }}
+                              >
+                                选择星期：
+                              </Typography>
+                              <FormGroup
+                                sx={{
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  m: 0
+                                }}
+                              >
+                                {weekdays.map((day, index) => (
+                                  <FormControlLabel
+                                    key={index}
+                                    control={
+                                      <Checkbox
+                                        checked={selectedDays.includes(day)}
+                                        onChange={() => toggleDay(day)}
+                                      />
+                                    }
+                                    label={day}
+                                    sx={{ flexBasis: "10%", width: "100%" }}
+                                  />
+                                ))}
+                              </FormGroup>
+                            </Grid>
+                            <Typography
                           variant="subtitle1"
                           color="textSecondary"
                           sx={{ mb: 1 }}
@@ -588,7 +600,9 @@ export default function DashboardAppPage() {
                         </Typography>
                         <Select
                           value={selectedState}
-                          onChange={(event) => setSelectedState(event.target.value)}
+                          onChange={(event) =>
+                            setSelectedState(event.target.value)
+                          }
                           sx={{ width: "100%" }}
                         >
                           <MenuItem value={"开"}>开</MenuItem>
@@ -596,7 +610,11 @@ export default function DashboardAppPage() {
                           <MenuItem value={"full"}>满载！</MenuItem>
                           <MenuItem value={"empty"}>摆烂！</MenuItem>
                         </Select>
+                          </>
+                        )}
                       </Grid>
+
+
 
                       <Grid item xs={12}>
                         <Button
@@ -615,7 +633,8 @@ export default function DashboardAppPage() {
                 </Grid>
               </Box>
             </Box>
-          </div></>
+          </div>
+        </>
       );
     }
   }
@@ -627,9 +646,9 @@ export default function DashboardAppPage() {
       </Helmet>
 
       <Container maxWidth="xl">
-      {content}
-      {controlcenter}
-        
+        {content}
+        {controlcenter}
+
         {/* 其他组件或内容 */}
       </Container>
     </>
