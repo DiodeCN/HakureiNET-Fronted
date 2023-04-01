@@ -33,6 +33,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import { Link, Redirect } from "react-router-dom";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 import { connect, sendMsg } from "../sections/auth/login/loginaction";
 
@@ -56,7 +57,7 @@ export default function DashboardAppPage() {
   const [newGroupName, setNewGroupName] = useState("");
   const [anchorElPopover, setAnchorElPopover] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const predefinedTimes = [5, 30, 60, 120, 180, 240, 480];
+  const predefinedTimes = [0.5, 1, 2, 4, 8];
   const [customTime, setCustomTime] = useState(0);
   const [selectedHours, setSelectedHours] = useState([]);
   const [operationMode, setOperationMode] = useState("开");
@@ -180,7 +181,17 @@ export default function DashboardAppPage() {
 
   let content = null;
   let controlcenter = null;
-  const [showAutomationControls, setShowAutomationControls] = useState(true);
+
+  const [showAutomationControls, setShowAutomationControls] = useState(false);
+  const [showTimerControls, setShowTimerControls] = useState(false);
+  const handleConfirm1 = () => {
+    console.log("选定的时间:", customTime);
+    setShowTimerControls(false);
+  };
+
+  const handleCancel = () => {
+    setShowTimerControls(false);
+  };
 
   if (count === null) {
     content = (
@@ -392,8 +403,6 @@ export default function DashboardAppPage() {
                   >
                     <MenuItem value={"新建家庭组"}>新建家庭组</MenuItem>
 
-                    <MenuItem>&nbsp;</MenuItem>
-
                     {familyGroups.map((group, index) => (
                       <MenuItem key={index} value={group}>
                         {group}
@@ -468,42 +477,7 @@ export default function DashboardAppPage() {
                 }}
               >
                 {/*
-    <Grid item xs={12} sm={6} sx={{ marginTop: 0 }}>
-      <Typography
-        variant="subtitle1"
-        color="textSecondary"
-        sx={{ mb: 1 }}
-      >
-        预设时间：
-      </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-        }}
-      >
-        {predefinedTimes.map((time, index) => (
-          <Button
-            key={index}
-            variant="outlined"
-            onClick={() => setCustomTime(time)}
-            sx={{ marginBottom: "8px", minWidth: "85px" }}
-          >
-            {time} 分钟
-          </Button>
-        ))}
-        <TextField
-          label="自定义"
-          type="number"
-          value={customTime}
-          onChange={(event) =>
-            setCustomTime(parseInt(event.target.value, 10))
-          }
-          sx={{ width: "100%", marginBottom: "8px" }}
-        />
-      </Box>
-    </Grid>
+
     */}
                 <Grid container spacing={2} sx={{ marginTop: 0 }}>
                   <Grid item xs={12} sm={0}>
@@ -534,6 +508,7 @@ export default function DashboardAppPage() {
                             )}
                           </IconButton>
                         </Typography>
+
                         {showAutomationControls && (
                           <>
                             <Typography
@@ -592,41 +567,167 @@ export default function DashboardAppPage() {
                               </FormGroup>
                             </Grid>
                             <Typography
-                          variant="subtitle1"
-                          color="textSecondary"
-                          sx={{ mb: 1 }}
-                        >
-                          执行命令：
-                        </Typography>
-                        <Select
-                          value={selectedState}
-                          onChange={(event) =>
-                            setSelectedState(event.target.value)
-                          }
-                          sx={{ width: "100%" }}
-                        >
-                          <MenuItem value={"开"}>开</MenuItem>
-                          <MenuItem value={"关"}>关</MenuItem>
-                          <MenuItem value={"full"}>满载！</MenuItem>
-                          <MenuItem value={"empty"}>摆烂！</MenuItem>
-                        </Select>
+                              variant="subtitle1"
+                              color="textSecondary"
+                              sx={{ mb: 1 }}
+                            >
+                              执行命令：
+                            </Typography>
+                            <Select
+                              value={selectedState}
+                              onChange={(event) =>
+                                setSelectedState(event.target.value)
+                              }
+                              sx={{ width: "100%" }}
+                            >
+                              <MenuItem value={"开"}>开</MenuItem>
+                              <MenuItem value={"关"}>关</MenuItem>
+                              <MenuItem value={"full"}>满载！</MenuItem>
+                              <MenuItem value={"empty"}>摆烂！</MenuItem>
+                            </Select>
+                            <Grid item xs={12}>
+                              <Button
+                                variant="contained"
+                                onClick={handleConfirm}
+                                sx={{ marginRight: "8px", marginTop: "16px" }}
+                              >
+                                确定
+                              </Button>
+                              <Button
+                                variant="contained"
+                                onClick={handleClear}
+                                sx={{ marginTop: "16px" }}
+                              >
+                                清除
+                              </Button>
+                            </Grid>
+                            <Box
+                              sx={{
+                                width: "100%",
+                                borderTop: "1px solid black",
+                                marginTop: 2
+                              }}
+                            />
                           </>
                         )}
-                      </Grid>
 
-
-
-                      <Grid item xs={12}>
-                        <Button
-                          variant="contained"
-                          onClick={handleConfirm}
-                          sx={{ marginRight: "8px" }}
-                        >
-                          确定
-                        </Button>
-                        <Button variant="contained" onClick={handleClear}>
-                          清除
-                        </Button>
+                        <Grid container spacing={2} sx={{ marginTop: 0 }}>
+                          <Grid item xs={12} sm={0}>
+                            <Grid container spacing={2}>
+                              <Grid item xs={12}>
+                                <Typography
+                                  variant="h4"
+                                  sx={{
+                                    color: "#555555",
+                                    mb: 2,
+                                    display: "flex",
+                                    alignItems: "center"
+                                  }}
+                                >
+                                  计时器
+                                  <IconButton
+                                    edge="end"
+                                    color="inherit"
+                                    onClick={() =>
+                                      setShowTimerControls(!showTimerControls)
+                                    }
+                                    sx={{ marginLeft: 1 }}
+                                  >
+                                    {showTimerControls ? (
+                                      <Visibility />
+                                    ) : (
+                                      <VisibilityOff />
+                                    )}
+                                  </IconButton>
+                                </Typography>
+                                {showTimerControls && (
+                                  <>
+                                    <Typography
+                                      variant="subtitle1"
+                                      color="textSecondary"
+                                      sx={{ mb: 1 }}
+                                    >
+                                      预设时间：
+                                    </Typography>
+                                    <Box
+                                      sx={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        flexWrap: "wrap"
+                                      }}
+                                    >
+                                      {predefinedTimes.map((time, index) => (
+                                        <Button
+                                          key={index}
+                                          variant="outlined"
+                                          onClick={() =>
+                                            setCustomTime(time * 60)
+                                          }
+                                          sx={{
+                                            marginBottom: "8px",
+                                            minWidth: "85px"
+                                          }}
+                                        >
+                                          {time} 小时
+                                        </Button>
+                                      ))}
+                                      <TextField
+                                        label="自定义"
+                                        type="number"
+                                        value={customTime}
+                                        onChange={(event) =>
+                                          setCustomTime(
+                                            parseInt(event.target.value, 10)
+                                          )
+                                        }
+                                        InputProps={{
+                                          endAdornment: (
+                                            <InputAdornment
+                                              position="end"
+                                              sx={{
+                                                display: "flex",
+                                                alignItems: "center"
+                                              }}
+                                            >
+                                              <span
+                                                style={{ marginRight: "4px" }}
+                                              >
+                                                分
+                                              </span>
+                                              <span>钟</span>
+                                            </InputAdornment>
+                                          )
+                                        }}
+                                        sx={{
+                                          width: "100%",
+                                          marginBottom: "8px",
+                                          marginTop: "8px"
+                                        }}
+                                      />
+                                    </Box>
+                                    <Button
+                                      variant="contained"
+                                      onClick={handleConfirm1}
+                                      sx={{
+                                        marginRight: "8px",
+                                        marginTop: "16px"
+                                      }}
+                                    >
+                                      确定
+                                    </Button>
+                                    <Button
+                                      variant="contained"
+                                      onClick={handleCancel}
+                                      sx={{ marginTop: "16px" }}
+                                    >
+                                      取消
+                                    </Button>
+                                  </>
+                                )}
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -646,8 +747,8 @@ export default function DashboardAppPage() {
       </Helmet>
 
       <Container maxWidth="xl">
-        {content}
         {controlcenter}
+        {content}
 
         {/* 其他组件或内容 */}
       </Container>
