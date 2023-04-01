@@ -110,6 +110,8 @@ export default function DashboardAppPage() {
   };
   const handleConfirm = () => {
     // 确认按钮的逻辑，例如保存设置
+    setShowAutomationControls(false);
+
   };
 
   const handleClear = () => {
@@ -137,6 +139,7 @@ export default function DashboardAppPage() {
         <FormControl fullWidth>
           <InputLabel htmlFor="family-group-selector1">家庭组</InputLabel>
           <Select
+
             label="家庭组"
             id="family-group-selector1"
             value={deviceFamilyGroup || ""} // 设置读取到的设备家庭组作为默认值，如果没有则为空字符串
@@ -385,9 +388,17 @@ export default function DashboardAppPage() {
               <Typography variant="h3" sx={{ color: "#555555", mb: 2 }}>
                 控制中心
               </Typography>
-              <Typography variant="h4" sx={{ color: "#555555", mb: 2 }}>
-                家庭组
-              </Typography>
+              <Typography
+                          variant="h4"
+                          sx={{
+                            color: "#555555",
+                            mb: 2,
+                            display: "flex",
+                            alignItems: "center"
+                          }}
+                        >
+                          家庭组
+                          </Typography>
               <Grid
                 container
                 spacing={2}
@@ -540,7 +551,7 @@ export default function DashboardAppPage() {
                               <Typography
                                 variant="subtitle1"
                                 color="textSecondary"
-                                sx={{ mb: 1 }}
+                                sx={{ mb: 1 ,marginTop: "8px"}}
                               >
                                 选择星期：
                               </Typography>
@@ -569,7 +580,7 @@ export default function DashboardAppPage() {
                             <Typography
                               variant="subtitle1"
                               color="textSecondary"
-                              sx={{ mb: 1 }}
+                              sx={{ mb: 1,marginTop: "8px" }}
                             >
                               执行命令：
                             </Typography>
@@ -704,6 +715,25 @@ export default function DashboardAppPage() {
                                           marginTop: "8px"
                                         }}
                                       />
+                                                                  <Typography
+                              variant="subtitle1"
+                              color="textSecondary"
+                              sx={{ mb: 1,marginTop: "8px" }}
+                            >
+                              执行命令：
+                            </Typography>
+                            <Select
+                              value={selectedState}
+                              onChange={(event) =>
+                                setSelectedState(event.target.value)
+                              }
+                              sx={{ width: "100%" }}
+                            >
+                              <MenuItem value={"开"}>开</MenuItem>
+                              <MenuItem value={"关"}>关</MenuItem>
+                              <MenuItem value={"full"}>满载！</MenuItem>
+                              <MenuItem value={"empty"}>摆烂！</MenuItem>
+                            </Select>
                                     </Box>
                                     <Button
                                       variant="contained"
