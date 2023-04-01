@@ -1,11 +1,11 @@
 {
-  "name": "@minimal/material-kit-react",
-  "author": "minimals.cc",
+  "name": "hakureinet.elmcose.cn",
+  "author": "ElmCose",
   "licence": "MIT",
   "version": "1.6.0",
   "private": false,
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=6281 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
