@@ -74,7 +74,6 @@ export default function DashboardAppPage() {
     [theme.breakpoints.up("sm")]: {
       top: theme.spacing(1),
       right: theme.spacing(0),
-      height: "60px"
     }
   }));
 
@@ -831,11 +830,11 @@ export default function DashboardAppPage() {
         <>
           {" "}
           <StyledSnackbar
-            anchorOrigin={{ vertical: "top", horizontal: "left" }}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
             open={showSnackbar}
             autoHideDuration={6000}
             onClose={handleSnackbarClose}
-            sx={{ maxWidth: 250, backgroundColor: "green", right: 0 }}
+            sx={{ maxWidth: 200,right: 50 ,marginTop:5,marginRight:2}}
             message={<Typography variant="h2">设置成功！</Typography>}
             action={
               <IconButton
