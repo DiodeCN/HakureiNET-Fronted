@@ -112,7 +112,6 @@ export default function DashboardAppPage() {
     "周五",
     "周六",
     "周日",
-    "星期八！"
   ];
   const toggleDay = (day) => {
     if (selectedDays.includes(day)) {
@@ -629,7 +628,7 @@ export default function DashboardAppPage() {
                                       />
                                     }
                                     label={day}
-                                    sx={{ flexBasis: "10%", width: "100%" }}
+                                    sx={{ flexBasis: "8%", width: "80%" }}
                                   />
                                 ))}
                               </FormGroup>
