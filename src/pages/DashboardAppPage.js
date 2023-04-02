@@ -212,7 +212,7 @@ export default function DashboardAppPage() {
         // 调试用的  console.log(`设备 ${i} 属于选定的家庭组：${selectedGroupName}`);
         const action1 = selectedState;
         sendMsg(
-          `${action1}|${selectedHour}:${selectedMinute}|${selectedDays}|${ids}`
+          `${action1}|${selectedHour}|${selectedMinute}|${selectedDays}|${ids}`
         );
       }
     }
