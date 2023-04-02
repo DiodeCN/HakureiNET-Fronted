@@ -121,7 +121,8 @@ export default function LoginForm() {
             >
               <MenuItem value="电灯">电灯（M2接口及P15电磁阀）</MenuItem>
               <MenuItem value="风扇">风扇（M1调频接口）</MenuItem>
-              <MenuItem value="">空调（红外线设备）&nbsp;| &nbsp; 开发中...</MenuItem>
+              <MenuItem >空调（红外设备）&nbsp;| &nbsp; 开发中...</MenuItem>
+              <MenuItem >音箱（蓝牙设备）&nbsp;| &nbsp; 开发中...</MenuItem>
               <MenuItem value="custom">自定义...</MenuItem>
             </Select>
           </FormControl>
