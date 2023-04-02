@@ -114,6 +114,7 @@ export default function DashboardAppPage() {
     setSelectedHour(1);
     setSelectedDays([]);
     setSelectedState("开");
+    setShowAutomationControls(false);
   };
 
   // 添加 useEffect，以便在 familyGroups 发生变化时触发更新
@@ -193,10 +194,12 @@ export default function DashboardAppPage() {
     // 遍历所有设备 呜呜呜，为什么不能用++
     for (let i = 1; i <= count; i+=1) {
       const deviceFamilyGroup = localStorage.getItem(`${i}.familygroup`);
-      
+      const ids =  localStorage.getItem(`${i}.id`);
       // 检查设备是否属于选定的家庭组
       if (deviceFamilyGroup === selectedGroupName) {
-        console.log(`设备 ${i} 属于选定的家庭组：${selectedGroupName}`);
+      // 调试用的  console.log(`设备 ${i} 属于选定的家庭组：${selectedGroupName}`);
+        const action1=selectedState
+        sendMsg(`${action1}${ids}`);
       }
     }
   
@@ -206,14 +209,17 @@ export default function DashboardAppPage() {
   const handleConfirm1 = () => {
     const selectedGroupName = selectedGroup;
 
-    console.log("选定的时间:", customTime);
+    // console.log("选定的时间:", customTime);
 
-    for (let i0 = 1; i0 <= count; i0+=1) {
-      const deviceFamilyGroup = localStorage.getItem(`${i0}.familygroup`);
-      
+    // 遍历所有设备 呜呜呜，为什么不能用++
+    for (let i = 1; i <= count; i+=1) {
+      const deviceFamilyGroup = localStorage.getItem(`${i}.familygroup`);
+      const ids =  localStorage.getItem(`${i}.id`);
       // 检查设备是否属于选定的家庭组
       if (deviceFamilyGroup === selectedGroupName) {
-        console.log(`设备 ${i0} 属于选定的家庭组：${selectedGroupName}`);
+      // 调试用的   console.log(`设备 ${i} 属于选定的家庭组：${selectedGroupName}`);
+        const action1=selectedState
+        sendMsg(`${action1}|${customTime}|${ids}`);
       }
     }
     setShowTimerControls(false);
@@ -623,10 +629,10 @@ export default function DashboardAppPage() {
                               }
                               sx={{ width: "100%" }}
                             >
-                              <MenuItem value={"开"}>开</MenuItem>
-                              <MenuItem value={"关"}>关</MenuItem>
-                              <MenuItem value={"full"}>满载！</MenuItem>
-                              <MenuItem value={"empty"}>摆烂！</MenuItem>
+                              <MenuItem value={"&open;"}>开</MenuItem>
+                              <MenuItem value={"&shut;"}>关</MenuItem>
+                              <MenuItem value={"&full;"}>满载！</MenuItem>
+                              <MenuItem value={"&empty;"}>摆烂！</MenuItem>
                             </Select>
                             <Grid item xs={12}>
                               <Button
@@ -761,14 +767,10 @@ export default function DashboardAppPage() {
                                         }
                                         sx={{ width: "100%" }}
                                       >
-                                        <MenuItem value={"开"}>开</MenuItem>
-                                        <MenuItem value={"关"}>关</MenuItem>
-                                        <MenuItem value={"full"}>
-                                          满载！
-                                        </MenuItem>
-                                        <MenuItem value={"empty"}>
-                                          摆烂！
-                                        </MenuItem>
+                              <MenuItem value={"&open;"}>开</MenuItem>
+                              <MenuItem value={"&shut;"}>关</MenuItem>
+                              <MenuItem value={"&full;"}>满载！</MenuItem>
+                              <MenuItem value={"&empty;"}>摆烂！</MenuItem>
                                       </Select>
                                     </Box>
                                     <Button
