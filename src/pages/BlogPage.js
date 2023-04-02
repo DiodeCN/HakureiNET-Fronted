@@ -53,8 +53,8 @@ export default function BlogPage() {
             次元连接|HakureiNET! V1.0.1 ElmCose
           </Typography>
           <Typography variant="h4" gutterBottom align="left">
-            显而易见的是，我的<a href="https://elmcose.cn/">博客</a>
-            已经通过了管局备案，在这里你可以看到有关我给网站留的最新信息。
+            显而易见的是，我的<a href="https://elmcose.cn/2023/03/31/HakureiNET/">博客</a>
+            已经通过了管局备案，在这里你可以看到有关我给本网站留的最新信息。
             <br />
           </Typography>
         </Box>
