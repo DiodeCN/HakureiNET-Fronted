@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -24,6 +24,9 @@ export default function LoginForm() {
   const [keepLoggedIn, setKeepLoggedIn] = useState(false);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('请选择设备类型！');
+  const handleBindingSuccess = () => {
+    clearTimeout(bindingFailureTimeout);
+  };
 
   const handleTypeChange = (event) => {
     setType(event.target.value);
@@ -37,18 +40,32 @@ export default function LoginForm() {
     setOpen(false); // 关闭弹窗
   };
 
+  let bindingFailureTimeout;
+  useEffect(() => {
+    return () => {
+      handleBindingSuccess();
+    };
+  }, []);
+  
+
   const handleClick = () => {
     const deviceType = type === 'custom' ? customType : type;
-    if (deviceType !== ''){
+    if (deviceType !== '') {
       send();
+      setTimeout(() => {
+        setMessage('绑定失败！');
+        setOpen(true);
+      }, 1000);
     } else {
-      setMessage('请选择设备类型！'); 
-      setOpen(true); // 打开弹窗
-    };
-    console.log("设备类型：",deviceType);
+      setMessage('请选择设备类型！');
+      setOpen(true); 
+    }
+    console.log('设备类型：', deviceType);
     localStorage.setItem(`type.cache`, deviceType);
+  
 
   };
+  
   connect();
   const send = () => {
     const uid = document.getElementById("uid").value
