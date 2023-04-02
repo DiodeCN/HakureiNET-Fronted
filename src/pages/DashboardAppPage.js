@@ -59,8 +59,8 @@ export default function DashboardAppPage() {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const predefinedTimes = [0.5, 1, 2, 4, 8];
   const [customTime, setCustomTime] = useState(0);
-  const [selectedHours, setSelectedHours] = useState([]);
-  const [operationMode, setOperationMode] = useState("开");
+  // const [selectedHours, setSelectedHours] = useState([]);
+  // const [operationMode, setOperationMode] = useState("开");
   const [selectedHour, setSelectedHour] = useState(1);
   const [selectedDays, setSelectedDays] = useState([]);
   const [selectedState, setSelectedState] = useState("开");
@@ -199,7 +199,7 @@ export default function DashboardAppPage() {
       if (deviceFamilyGroup === selectedGroupName) {
       // 调试用的  console.log(`设备 ${i} 属于选定的家庭组：${selectedGroupName}`);
         const action1=selectedState
-        sendMsg(`${action1}${ids}`);
+        sendMsg(`${action1}|${selectedHour}:${selectedMinute}|${selectedDays}|${ids}`);
       }
     }
   
