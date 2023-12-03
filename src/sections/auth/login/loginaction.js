@@ -1,4 +1,4 @@
-const socket = new WebSocket("ws://47.243.228.7:6280/ws");
+const socket = new WebSocket("ws://backhakurei.elmcose.cn/ws");
 
 const connect = () => {
   console.log("连接中");

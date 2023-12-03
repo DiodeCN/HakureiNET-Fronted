@@ -65,7 +65,7 @@ export default function LoginPage() {
             次元连接
             </Typography>
             <Typography variant="h2" gutterBottom>
-            HakureiNET!
+            HakureiNET!🏳️‍⚧️🏳️‍⚧️🏳️‍⚧️
             </Typography>
 
             <Typography variant="body2" sx={{ mb: 5 }}>
